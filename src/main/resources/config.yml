@@ -1,0 +1,28 @@
+routes:
+  # Route 1: Default general access
+  - hostname: "play.example.com"
+    defaultServer: "lobby"
+    permissionRoutes: [] # No specific permission-based routing for this hostname
+
+  # Route 2: VIP access
+  - hostname: "vip.example.com"
+    defaultServer: "vip_lobby" # Fallback if no permission route matches or VIP server is offline
+    permissionRoutes:
+      - permission: "velocity.vip.access"
+        targetServer: "vip_server"
+        denyMessage: "<red>You need VIP rank to access this server."
+
+
+  # Route 3: Staff access
+  - hostname: "staff.example.com"
+    defaultServer: "admin_lobby" # Fallback if no permission route matches
+    permissionRoutes:
+      - permission: "velocity.staff.access"
+        targetServer: "staff_server"
+        denyMessage: "<red>You do not have staff access."
+
+  # Route 4: Global fallback (if no specific hostname matches)
+  # This acts as a default for any hostname not explicitly listed above.
+  - hostname: "*" # Wildcard for any hostname
+    defaultServer: "lobby"
+    permissionRoutes: []
